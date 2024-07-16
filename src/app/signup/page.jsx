@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import axios from "axios";
+import Alert from "@mui/material/Alert";
 const Registration = () => {
   const [formData, setFormData] = useState({
     accountLogo: null,
@@ -9,7 +10,6 @@ const Registration = () => {
     username: "",
     password: "",
   });
-  console.log(formData);
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -18,21 +18,21 @@ const Registration = () => {
       [name]: files ? files[0] : value,
     });
   };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    const res = await axios
-      .post("localhost:8000/api/auth/registration", {
-        firstName: "Fred",
-        lastName: "Flintstone",
-      })
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/signup",
+        formData
+      );
+      console.log(response);
+    } catch (error) {
+      if (error.response && error.response.status === 409) {
+        console.log("User already exists");
+      } else {
+        console.error("Error occurred:", error);
+      }
+    }
   };
 
   return (
