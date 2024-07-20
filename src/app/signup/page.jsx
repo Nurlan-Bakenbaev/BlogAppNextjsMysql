@@ -2,8 +2,8 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import axios from "axios";
-import Alert from "@mui/material/Alert";
 const Registration = () => {
+  const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
     accountLogo: null,
     email: "",
@@ -12,6 +12,7 @@ const Registration = () => {
   });
 
   const handleChange = (e) => {
+    setError(false)
     const { name, value, files } = e.target;
     setFormData({
       ...formData,
@@ -25,10 +26,9 @@ const Registration = () => {
         "http://localhost:8000/api/signup",
         formData
       );
-      console.log(response);
     } catch (error) {
       if (error.response && error.response.status === 409) {
-        console.log("User already exists");
+        setError(true);
       } else {
         console.error("Error occurred:", error);
       }
@@ -42,7 +42,7 @@ const Registration = () => {
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+              className="w-full px-3 py-2 border rounded-lg focus:outline-none "
               type="text"
               name="username"
               value={formData.username}
@@ -52,7 +52,9 @@ const Registration = () => {
           </div>
           <div className="mb-4">
             <input
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+              className={`${
+                error && "border-red-300"
+              } w-full px-3 py-2 border rounded-lg focus:outline-none`}
               type="email"
               name="email"
               value={formData.email}
@@ -62,7 +64,9 @@ const Registration = () => {
           </div>
           <div className="mb-6">
             <input
-              className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
+              className={`${
+                error && "border-red-300 bg-red-100 "
+              } w-full px-3 py-2 border rounded-lg focus:outline-none`}
               type="password"
               placeholder="Password"
               name="password"

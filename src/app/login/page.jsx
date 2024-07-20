@@ -1,13 +1,13 @@
 "use client";
+import axios from "axios";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
-
 const Login = () => {
   const [login, setLogin] = useState({
     email: "",
     password: "",
   });
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLogin({
@@ -15,15 +15,24 @@ const Login = () => {
       [name]: value,
     });
   };
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log('Login data:', login);
+  const nav = useRouter();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post(
+        "http://localhost:8000/api/login",
+        login
+      );
+      nav.push("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
   return (
     <div className="flex justify-center items-center h-screen bg-gray-100">
       <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
         <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
-        <form>
+        <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
@@ -49,13 +58,13 @@ const Login = () => {
           <div className="flex items-center justify-between">
             <button
               className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-              type="button">
+              type="submit">
               Login
             </button>
             <Link
               className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800"
-              href="/register">
-              Creat an account?
+              href="/signup">
+              Create an account?
             </Link>
           </div>
         </form>
