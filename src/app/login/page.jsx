@@ -29,9 +29,9 @@ const Login = () => {
     }
   };
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-100">
-      <div className="w-full max-w-md bg-white rounded-lg shadow-md p-8">
-        <h2 className="text-2xl font-bold mb-6 text-center">Login</h2>
+    <div className="flex justify-center items-center h-screen ">
+      <div className="w-full max-w-md bg-white rounded-lg duration-300 hover:shadow-xl shadow-md p-8">
+        <h2 className="text-2xl font-bold text-center">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4">
             <input

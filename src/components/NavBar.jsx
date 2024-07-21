@@ -1,27 +1,49 @@
+"use client"
+import { useState } from "react";
 import Link from "next/link";
-
-const NavBar = () => {
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
   return (
-    <nav className="bg-slate-800 p-4">
-      <ul className="flex justify-between gap-2">
-        <li>
-          <Link href="/login">
-            <span className="text-white hover:text-gray-400">Login</span>
+    <nav className="bg-gray-800 text-white p-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="text-xl font-bold">
+          <Link href="/">MySite</Link>
+        </div>
+        <div className="md:hidden flex items-center">
+          <button
+            onClick={toggleMenu}
+            className="text-white focus:outline-none ">
+            <svg
+              className="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+        <div className={`md:flex ${isOpen ? "block" : "hidden"} `}>
+          <Link href="/userposts" className="block py-2 px-4 hover:bg-gray-700">
+            My Posts
           </Link>
-        </li>
-        <li>
-          <Link href="/post">
-            <span className="text-white hover:text-gray-400">Post</span>
+          <Link href="/write" className="block py-2 px-4 hover:bg-gray-700">
+            Write
           </Link>
-        </li>
-        <li>
-          <Link href="/addpost">
-            <span className="text-white hover:text-gray-400">Add Post</span>
+          <Link href="/login" className="block py-2 px-4 hover:bg-gray-700">
+            Login
           </Link>
-        </li>
-      </ul>
+        </div>
+      </div>
     </nav>
   );
 };
 
-export default NavBar;
+export default Navbar;

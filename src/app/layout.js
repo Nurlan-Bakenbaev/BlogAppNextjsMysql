@@ -13,8 +13,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
-        <NavBar />
-        {children}
+        <NavBar /> <div className="w-full md:w-[80%] mx-auto">{children}</div>
       </body>
     </html>
   );
