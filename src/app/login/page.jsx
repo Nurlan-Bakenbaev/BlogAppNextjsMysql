@@ -8,6 +8,7 @@ const Login = () => {
     email: "",
     password: "",
   });
+  const [loginError, setError] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
     setLogin({
@@ -25,11 +26,11 @@ const Login = () => {
       );
       nav.push("/");
     } catch (error) {
-      console.log(error);
+      setError(true);
     }
   };
   return (
-    <div className="flex justify-center items-center h-screen ">
+    <div className="flex justify-center items-center h-screen">
       <div className="w-full max-w-md bg-white rounded-lg duration-300 hover:shadow-xl shadow-md p-8">
         <h2 className="text-2xl font-bold text-center">Login</h2>
         <form onSubmit={handleSubmit}>
@@ -44,6 +45,9 @@ const Login = () => {
               onChange={handleChange}
             />
           </div>
+          {loginError && (
+            <span className="text-red-500 font-semibold">User not found</span>
+          )}
           <div className="mb-6">
             <input
               className="w-full px-3 py-2 border rounded-lg focus:outline-none focus:border-blue-500"
