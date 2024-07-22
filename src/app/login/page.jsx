@@ -1,34 +1,28 @@
 "use client";
+import { AuthContext } from "@/context/authContext";
 import axios from "axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 const Login = () => {
-  const [login, setLogin] = useState({
+  const [loginData, setLoginData] = useState({
     email: "",
     password: "",
   });
   const [loginError, setError] = useState(false);
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setLogin({
-      ...login,
+    setLoginData({
+      ...loginData,
       [name]: value,
     });
   };
+  const { login } = useContext(AuthContext);
   const nav = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        "http://localhost:8000/api/login",
-        login,
-        {
-          headers: { "Content-Type": "application/json" },
-          withCredentials: true,
-        }
-      );
-
+      login(loginData);
       nav.push("/");
     } catch (error) {
       setError(true);
