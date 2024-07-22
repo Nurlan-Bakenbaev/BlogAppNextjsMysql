@@ -22,8 +22,13 @@ const Login = () => {
     try {
       const response = await axios.post(
         "http://localhost:8000/api/login",
-        login
+        login,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
       );
+
       nav.push("/");
     } catch (error) {
       setError(true);

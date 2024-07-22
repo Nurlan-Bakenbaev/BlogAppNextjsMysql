@@ -9,7 +9,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import Link from "next/link";
 export default function PostCard() {
   return (
-    <Card sx={{ maxWidth: 320 }}>
+    <div className="max-w-[320px] hover:bg-slate-100 shadow-lg hover:shadow-2xl ">
       <CardMedia
         sx={{ height: 180 }}
         image="https://plus.unsplash.com/premium_photo-1668404817591-f16aec3e1d08?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -33,6 +33,6 @@ export default function PostCard() {
           <Link href={"/post"}>Learn More</Link>
         </Button>
       </CardActions>
-    </Card>
+    </div>
   );
 }
