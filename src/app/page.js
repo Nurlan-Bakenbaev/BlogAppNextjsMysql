@@ -6,7 +6,6 @@ import { useContext, useMemo } from "react";
 const Home = () => {
   const { posts } = useContext(PostContext);
   const memoPosts = useMemo(() => posts, [posts]);
-  console.log(memoPosts);
   return (
     <div className="my-5">
       <h2 className="text-2xl text-center">Post</h2>

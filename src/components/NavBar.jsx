@@ -6,7 +6,7 @@ import LogoutIcon from "@mui/icons-material/Logout";
 const Navbar = () => {
   const { currentUser, logout } = useContext(AuthContext);
   return (
-    <nav className="bg-gray-800 text-white p-4">
+    <nav className="bg-gray-800 text-white p-4 mb-12">
       <div className="container mx-auto flex justify-between items-center">
         <div className="text-xl font-bold">
           <Link href="/">MySite</Link>

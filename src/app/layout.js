@@ -20,7 +20,9 @@ export default function RootLayout({ children }) {
         <AuthContextProvider>
           <PostContextProvider>
             <NavBar />
-            <div className="w-full md:w-[80%] mx-auto">{children}</div>
+            <div className="px-4 w-full lg:w-[80%] mx-auto min-h-screen">
+              {children}
+            </div>
             <Footer />
           </PostContextProvider>
         </AuthContextProvider>
