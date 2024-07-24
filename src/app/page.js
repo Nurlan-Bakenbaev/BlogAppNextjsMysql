@@ -1,14 +1,26 @@
+"use client";
 import PostCard from "@/components/PostCard";
-import React from "react";
+import { PostContext } from "@/context/postsContext";
+import { useContext, useMemo } from "react";
+
 const Home = () => {
+  const { posts } = useContext(PostContext);
+  const memoPosts = useMemo(() => posts, [posts]);
+  console.log(memoPosts);
   return (
     <div className="my-5">
       <h2 className="text-2xl text-center">Post</h2>
       <div className="flex flex-row justify-center flex-wrap gap-4">
-        <PostCard />
-        <PostCard />
-        <PostCard />
-        <PostCard />
+        {memoPosts.map((post) => (
+          <div key={post.id}>
+            <PostCard
+              id={post.id}
+              img={post.img}
+              title={post.title}
+              desc={post.desc}
+            />
+          </div>
+        ))}
       </div>
     </div>
   );

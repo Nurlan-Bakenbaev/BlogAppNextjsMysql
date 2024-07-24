@@ -7,22 +7,20 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Link from "next/link";
-export default function PostCard() {
+export default function PostCard({ id, desc, title, img }) {
   return (
     <div className="max-w-[320px] hover:bg-slate-100 shadow-lg hover:shadow-2xl ">
       <CardMedia
-        sx={{ height: 180 }}
-        image="https://plus.unsplash.com/premium_photo-1668404817591-f16aec3e1d08?q=80&w=1587&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-        title="poster"
+        sx={{ height: 180, minWidth: 280 }}
+        image={`${img || "/posts.jpg"}`}
+        title={"Post-Poster"}
       />
       <CardContent>
         <Typography gutterBottom variant="h4" component="div">
-          Post
+          {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos,
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos,
-          maiores!
+          {desc}
         </Typography>
       </CardContent>
       <CardActions>
@@ -30,7 +28,7 @@ export default function PostCard() {
           <FavoriteIcon />
         </Button>
         <Button size="small">
-          <Link href={"/post"}>Learn More</Link>
+          <Link href={`/post/${id}`}>Learn More</Link>
         </Button>
       </CardActions>
     </div>
