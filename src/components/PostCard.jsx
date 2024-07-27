@@ -1,5 +1,4 @@
 import * as React from "react";
-import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
@@ -7,11 +6,13 @@ import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Link from "next/link";
-export default function PostCard({ id, desc, title, img }) {
+import moment from "moment";
+
+export default function PostCard({ id, desc, title, img, date }) {
   return (
     <div className="max-w-[320px] hover:bg-slate-100 shadow-lg hover:shadow-2xl ">
       <CardMedia
-        sx={{ height: 180, minWidth: 280 }}
+        sx={{ minHeight: 180, minWidth: 280 }}
         image={`${img || "/posts.jpg"}`}
         title={"Post-Poster"}
       />
@@ -22,14 +23,18 @@ export default function PostCard({ id, desc, title, img }) {
         <Typography variant="body2" color="text.secondary">
           {desc}
         </Typography>
+        <Typography variant="body2" color="text.secondary">
+          Posted {moment(date).fromNow()}
+        </Typography>
       </CardContent>
+
       <CardActions>
         <Button size="small">
           <FavoriteIcon />
         </Button>
-        <Button size="small">
+        <button className="p-2 hover:bg-blue-200 rounded-md">
           <Link href={`/post/${id}`}>Learn More</Link>
-        </Button>
+        </button>
       </CardActions>
     </div>
   );

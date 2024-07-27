@@ -2,6 +2,7 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 const Registration = () => {
   const [error, setError] = useState(false);
   const [formData, setFormData] = useState({
@@ -10,7 +11,7 @@ const Registration = () => {
     username: "",
     password: "",
   });
-
+  const router = useRouter();
   const handleChange = (e) => {
     setError(false);
     const { name, value, files } = e.target;
@@ -26,11 +27,11 @@ const Registration = () => {
         "http://localhost:8000/api/signup",
         formData
       );
+      router.push("/login");
     } catch (error) {
       if (error.response && error.response.status === 409) {
         setError(true);
-      } else {
-        console.error("Error occurred:", error);
+        console.error(error);
       }
     }
   };
